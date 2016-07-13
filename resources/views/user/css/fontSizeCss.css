@@ -1,0 +1,44 @@
+@media screen and (max-width: 320px){
+    .seat_checked_label{
+        font-size: 18px;
+    }
+    .inner-div span{
+        font-size: 15px;
+    }
+    .select_btn{
+        font-size: 15px;
+    }
+}
+@media screen and (min-width: 321px) and (max-width: 375px){
+    .seat_checked_label{
+        font-size: 20px;
+    }
+    .inner-div span{
+        font-size: 20px;
+    }
+    .select_btn{
+        font-size: 20px;
+    }
+}
+@media screen and (min-width: 376px) and (max-width: 750px){
+    .seat_checked_label{
+        font-size: 20px;
+    }
+    .inner-div span{
+        font-size: 22px;
+    }
+    .select_btn{
+        font-size: 22px;
+    }
+}
+@media screen and (min-width: 751px) {
+    .seat_checked_label{
+        font-size: 30px;
+    }
+    .inner-div span{
+        font-size: 30px;
+    }
+    .select_btn{
+        font-size: 30px;
+    }
+}
