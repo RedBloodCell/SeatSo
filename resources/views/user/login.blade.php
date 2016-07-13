@@ -164,6 +164,14 @@
     @endif
     <form method="post" action="" >
         {{csrf_field()}}
+        <?php
+        $arr = array(3);
+        $arr[0]=1;
+        $arr[1]=2;
+        $arr[2] =3;
+        $x =-1;
+        ?>
+        <?php $x=$x+1; echo $arr[$x];?>
         <input type="text" name="user_phone" placeholder="请输入手机号码" id="input1">
         <input type="password" name="user_pass" placeholder="请输入密码" id="input2">
         <div class="report_info">

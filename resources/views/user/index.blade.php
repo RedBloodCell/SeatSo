@@ -84,7 +84,7 @@
         <div class="login">
             <p class="text1">二楼自习室</p>
             <p class="text2">8:00-22:00开馆前可提前半小时预订</p>
-            <a href={{url('resources\views\user\SeatSo.html')}} class="open"> open</a>
+            <a href={{url('user/seatso')}} class="open"> open</a>
         </div>
     </body>
     <script>

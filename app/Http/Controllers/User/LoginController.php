@@ -46,4 +46,16 @@ class LoginController extends CommonController
         $code = new \Code();
         $code -> make();
     }
+
+    public function seatEmpty()
+    {
+        $results = DB::select('select * from seat_distribution');
+        $id = array();
+        $a = -1;
+        foreach ($results as $user) {
+            $a=$a+1;
+            $id[$a]=$user->seat_id;
+        }
+        echo $id[0];
+    }
 }

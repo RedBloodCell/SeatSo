@@ -16,7 +16,10 @@ Route::get('/', function () {
 });
 
 Route::get('/code','User\LoginController@code');
+Route::get('/seatEmpty','User\LoginController@seatEmpty');
 Route::any('/user/login','User\LoginController@login');
 Route::any('/user/register','User\RegisterController@register');
 Route::get('/user/index','User\IndexController@index');
+Route::any('/user/seatso','User\SeatsoController@seatso');
+
 
