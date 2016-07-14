@@ -118,7 +118,6 @@
     </style>
 </head>
 <div class="container">
-
     <body class="register" id="seats">
     <!--上方提示图标-->
     <div class="top-panel">
@@ -1365,44 +1364,84 @@
             <td><img class="seat" src=""></td>
         </tr>
         </tbody>
-    </table>
-    <a class="select_btn">确认选择</a>
-    <div class="seat_selected">
-
-
+        <form action="" method="post">
+            {{csrf_field()}}
+            <input name='result' id="result" style="display:none" type="text" ></input>
+    <input value="确认选座" id="submit" type="submit" class="select_btn"></input>
+    </form>
+            <div class="seat_selected">
     </div>
-
 </div>
 </body>
 <?php
     $results = DB::select('select * from seat_distribution');
     $seat_row = array();
     $seat_column = array();
+    $seat_id = array();
+    $seat_occupy = array();
     $a = -1;
     foreach ($results as $user) {
         $a=$a+1;
         $seat_row[$a]=$user->seat_row;
         $seat_column[$a]=$user->seat_column;
+        $seat_id[$a]=$user->seat_id;
+        $seat_occupy[$a]=$user->seat_occupy;
     }
 ?>
 <script>
 
-    $(document).ready(function(){
+        $(document).ready(function(){
         var row    =eval('<?php echo json_encode($seat_row);?>');
-        var column = eval('<?php echo json_encode($seat_column);?>');
-        //console.log(obj[2]);
-
+        var column =eval('<?php echo json_encode($seat_column);?>');
+        var sid=eval('<?php echo json_encode($seat_id);?>');
+        var occupy=eval('<?php echo json_encode($seat_occupy);?>');
+        var seat_id="空";
         for(var i=0;i<488;i++){
 
-             if(1){
+             if(occupy[i]){
+                 $("#tbody").children().eq(row[i]).children().eq(column[i]).children().eq(0).attr("id",sid[i]);
 
-                 $("#tbody").children().eq(row[i]).children().eq(column[i]).children().eq(0).attr("src","{{asset('resources/views/user/img/空座标志.png')}}");
+                 $("#tbody").children().eq(row[i]).children().eq(column[i]).children().eq(0).attr("src","{{asset('resources/views/user/img/有人标志.png')}}");
                  $("#tbody").children().eq(row[i]).children().eq(column[i]).children().eq(0).css("display","block");
              }else{
-                 $("#tbody").children().eq(2).children().eq(2).children().eq(0).attr("src","{{asset('resources/views/user/img/有人标志.png')}}");
-                 $("#tbody").children().eq(2).children().eq(2).children().eq(0).css("display","block");
+                 $("#tbody").children().eq(row[i]).children().eq(column[i]).children().eq(0).attr("id",sid[i]);
+                 $("#tbody").children().eq(row[i]).children().eq(column[i]).children().eq(0).attr("src","{{asset('resources/views/user/img/空座标志.png')}}");
+                 $("#tbody").children().eq(row[i]).children().eq(column[i]).children().eq(0).css("display","block");
              }
          }
+        $("td").click(function(){
+            if(($(this).children().eq(0).attr("src"))=="{{asset('resources/views/user/img/空座标志.png')}}"){
+                $(this).children().eq(0).attr("src","{{asset('resources/views/user/img/选择座位标志.png')}}");
+                seat_id=$(this).children().eq(0).attr("id");//选择座位赋值座位id
+            }else if(($(this).children().eq(0).attr("src"))=="{{asset('resources/views/user/img/选择座位标志.png')}}"){
+                $(this).children().eq(0).attr("src","{{asset('resources/views/user/img/空座标志.png')}}");
+            }
+        })
+        $("#submit").click(function(){
+            if(seat_id=="空"){
+                alert("请选择座位");
+                return;
+            }
+            $("#result").val(seat_id);//seat_id';
+           /* $.ajax({
+                /!*type:'GET',
+                url:"user/seatreport?seat="+seat_id ,
+                datatype:"json",*!/
+
+                type: 'POST',
+                url: "url('user/seatreport')}}",
+                data: { id: seat_id},
+                dataType: "json",
+
+                success:function(){
+                    alert(seat_id);
+                },
+                error:function(jqXHR){
+                    alert("error"+jqXHR.status);
+                }
+            })*/
+        })
     })
+
 </script>
 </html>

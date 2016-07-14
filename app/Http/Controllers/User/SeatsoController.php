@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 class SeatsoController extends CommonController
 {
@@ -20,6 +21,19 @@ class SeatsoController extends CommonController
             echo $value->seat_occupy;
         }
         dd($results);*/
-        return view('user.seatso');
+        if($input =Input::all()){
+            $id = $input['result'];
+            DB::update("update seat_distribution set seat_occupy = 1 where seat_id = $id");
+            return view('user.seatso');
+        }else {
+            return view('user.seatso');
+        }
+    }
+
+    public function seatreport()
+    {
+        $input=Input::all();
+        $o = 2;//$input['date'];
+        $affected = DB::update("update seat_distribution set seat_occupy = 1 where seat_id = $o");
     }
 }

@@ -21,5 +21,6 @@ Route::any('/user/login','User\LoginController@login');
 Route::any('/user/register','User\RegisterController@register');
 Route::get('/user/index','User\IndexController@index');
 Route::any('/user/seatso','User\SeatsoController@seatso');
+Route::any('/user/seatreport','User\SeatsoController@seatreport');
 
 
